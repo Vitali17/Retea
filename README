@@ -1,3 +1,16 @@
+# Simulator de Rețea – C++
+
+Acest proiect este un **simulator educațional de rețea** realizat în **C++**, creat pentru a învăța concepte de bază precum **programarea orientată pe obiect**, **grafuri** și **algoritmul BFS**.
+
+Programul permite:
+- Crearea unei rețele cu un număr dat de noduri
+- Adăugarea de legături între noduri
+- Afișarea conexiunilor
+- Trimiterea unui pachet între două noduri
+- Simularea pierderilor de pachete
+
+Proiectul este destinat **începătorilor** și are scop **educațional**, nu simularea unei rețele reale.
+
 
 
 

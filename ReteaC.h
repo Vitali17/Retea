@@ -1,6 +1,3 @@
-//
-// Created by Lenovo on 1/4/2026.
-//
 
 #ifndef C___RETEAC_H
 #define C___RETEAC_H
@@ -106,6 +103,7 @@ public:
         else std::cout<<"Eroare:Nodul nu exista\n\n";
     }
 };
+
 
 
 #endif //C___RETEAC_H

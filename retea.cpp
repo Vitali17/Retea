@@ -2,95 +2,9 @@
 //#include <cstdlib>
 #include <ctime>
 #include <cmath>
+#include "ReteaC.h"
+
 using namespace std;
-
-class Retea {
-    int n;
-    double p=rand()%10/100.0;
-    int adiacenta[10][10];
-
-public:
-    Retea(int noduri) {
-        n = noduri;
-
-        for(int i = 0; i < n; i++)
-            for(int j = 0; j < n; j++)
-                adiacenta[i][j] = 0;
-    }
-
-    void adaugaLegatura(int a, int b) {
-        adiacenta[a][b] = 1;
-        adiacenta[b][a] = 1;
-    }
-
-    void TrimitePachet(int sursa, int destinatie) {
-        int vizitat[10] = {0};
-        int parinte[10];
-        int coada[10];
-        int st = 0, dr = 0;
-
-        for(int i = 0; i < n; i++)
-            parinte[i] = -1;
-
-
-        coada[dr++] = sursa;
-        vizitat[sursa] = 1;
-
-        while(st < dr) {
-            int curent = coada[st++];
-
-            if(curent == destinatie)
-                break;
-
-            for(int i = 0; i < n; i++) {
-                if(adiacenta[curent][i] == 1 && !vizitat[i]) {
-                    vizitat[i] = 1;
-                    parinte[i] = curent;
-                    coada[dr++] = i;
-                }
-            }
-        }
-
-        if(!vizitat[destinatie]) {
-            cout << "Nu exista drum intre " << sursa << " si " << destinatie << endl;
-            return;
-        }
-
-
-        int drum[10];
-        int lungime = 0;
-        int nod = destinatie;
-
-        while(nod != -1) {
-            drum[lungime++] = nod;
-            nod = parinte[nod];
-        }
-
-        int pierderi=0;
-        cout << "Pachet trimis pe ruta: ";
-        for(int i = lungime - 1; i >= 0; i--) {
-            cout << drum[i];
-            if(i != 0) cout << " -> ";
-            pierderi++;
-        }
-        cout << endl;
-        cout<<"Pachetul a fost trimis cu pierderi de "<<ceil((1-pow(1-p, pierderi))*100)<<"%"<<endl;
-    }
-
-
-
-
-    void afiseaza() {
-        for(int i = 0; i < n; i++) {
-            cout << "Nodul " << i << " este conectat cu: ";
-            for(int j = 0; j < n; j++)
-                if(adiacenta[i][j] == 1) cout << j << " ";
-
-            cout << endl;
-        }
-    }
-};
-
 
 int main() {
 
@@ -110,7 +24,7 @@ int main() {
             cout<<"Introduceti numarul de noduri:";
             cin>>x;
             cout<<endl;
-            Retea *retea = new Retea(x);
+            ReteaC *retea = new ReteaC(x);
 
             while(true) {
                 for (int i=0;i<50;i++)
@@ -133,12 +47,12 @@ int main() {
 
                         cout << "Pentru a crea un nod introduceti doua adrese strict mai mici de "
                              << x << " si mai mari sau egale cu 0\n";
-                        cout << "Pentru a iesi tastati -1 -1\n";
+                        cout << "Pentru a iesi tastati 0 0\n";
 
                         while (true) {
                             cin >> x1 >> x2;
 
-                            if (x1 == -1 && x2 == -1)
+                            if (x1 == 0 && x2 == 0)
                                 break;
 
                             if (x1 < 0 || x2 < 0 || x1 >= x || x2 >= x || x1 == x2) {
@@ -146,10 +60,10 @@ int main() {
                                 continue;
                             }
 
+                            retea->verificare(x1,x2);
                             retea->adaugaLegatura(x1, x2);
                     }
                         break;
-
                     case 2:
                         for (int i=0;i<50;i++)
                             cout<<endl;
@@ -157,8 +71,16 @@ int main() {
                         cout<<"Legaturile create sunt:"<<endl;
                         retea -> afiseaza();
                         cout<<endl;
-                        cout<<"Pentru a iesi tastati orice valoare";
+                        cout<<"Pentru a sterge legaturi introduceti 1 in caz contrar introduceti 0 sa iesiti\n"
+                              "Daca alegeti sa stergeti introduceti cele doua noduri pe care doriti sa le stergeti, spre exemplu 0 1.\nDaca nodul exista veti primi un mesaj de confirmare in caz contrar eroare"<<endl;
                         cin>>ex;
+                        while (ex!=0) {
+                            int a,b;
+                            cin>>a>>b;
+                            retea -> stergereNod(a,b);
+                            cout<<"Daca mai doriti sa stergeti un nod introduceti 1, in caz contrar pentru a iesi inttroduceti 0:";
+                            cin>>ex;
+                        }
                         break;
                     case 3:
                         for (int i=0;i<50;i++)
@@ -173,7 +95,7 @@ int main() {
                         cout<<endl;
                         retea -> TrimitePachet(sursa,destinator);
                         cout<<endl;
-                        cout<<"Pentru a trimite un alt pachet introduce 1 in caz contrar reveniti la programul principal:";
+                        cout<<"Pentru a trimite un alt pachet introduce 1 in caz contrar introduceti orice valoare pentru\na reveni la programul principal:";
                         cin>>ex;
                         if (ex==1) goto A;
                         else break;
@@ -188,16 +110,7 @@ int main() {
 
     }
 
-    // Retea r(6);
-    //
-    // r.adaugaLegatura(0,1);
-    // r.adaugaLegatura(1,2);
-    // r.adaugaLegatura(1,3);
-    // r.adaugaLegatura(2,3);
-    // r.adaugaLegatura(3,4);
-    // r.adaugaLegatura(4,5);
-    //
-    // r.TrimitePachet(0,2);
+
 
     return 0;
 }

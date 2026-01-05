@@ -3,8 +3,21 @@
 #include <ctime>
 #include <cmath>
 #include "ReteaC.h"
+#include <windows.h>
 
 using namespace std;
+
+void loading() {
+    cout << "Loading";
+    for(int i = 0; i < 5; i++) {
+        Sleep(500);
+        cout << "\rLoading\a";
+        for(int j = 0; j <= i; j++)
+            cout << ".";
+        cout.flush();
+    }
+    cout << endl;
+}
 
 int main() {
 
@@ -16,6 +29,7 @@ int main() {
     cout<<"Tastati 1 pentru a incepe sau 0 pentru a iesi:";
     int z;
     cin>>z;
+    loading();
     for (int i=0;i<50;i++)
         cout<<endl;
     switch (z) {
@@ -24,7 +38,7 @@ int main() {
             cout<<"Introduceti numarul de noduri:";
             cin>>x;
             cout<<endl;
-            ReteaC *retea = new ReteaC(x);
+            ReteaC retea(x);
 
             while(true) {
                 for (int i=0;i<50;i++)
@@ -60,8 +74,8 @@ int main() {
                                 continue;
                             }
 
-                            retea->verificare(x1,x2);
-                            retea->adaugaLegatura(x1, x2);
+                            retea.verificare(x1,x2);
+                            retea.adaugaLegatura(x1, x2);
                     }
                         break;
                     case 2:
@@ -69,7 +83,7 @@ int main() {
                             cout<<endl;
                         int ex;
                         cout<<"Legaturile create sunt:"<<endl;
-                        retea -> afiseaza();
+                        retea.afiseaza();
                         cout<<endl;
                         cout<<"Pentru a sterge legaturi introduceti 1 in caz contrar introduceti 0 sa iesiti\n"
                               "Daca alegeti sa stergeti introduceti cele doua noduri pe care doriti sa le stergeti, spre exemplu 0 1.\nDaca nodul exista veti primi un mesaj de confirmare in caz contrar eroare"<<endl;
@@ -77,7 +91,8 @@ int main() {
                         while (ex!=0) {
                             int a,b;
                             cin>>a>>b;
-                            retea -> stergereNod(a,b);
+                            retea.stergereNod(a,b);
+                            retea.afiseaza();
                             cout<<"Daca mai doriti sa stergeti un nod introduceti 1, in caz contrar pentru a iesi inttroduceti 0:";
                             cin>>ex;
                         }
@@ -86,19 +101,26 @@ int main() {
                         for (int i=0;i<50;i++)
                             cout<<endl;
                         cout<<"Pentru a trimite un pachet introduceti sursa si destinatorul\n";
-                        A:
-                        cout<<"Sursa:";
                         int sursa, destinator;
-                        cin>>sursa;
-                        cout<<"Introduceti destinatorul:";
-                        cin>>destinator;
-                        cout<<endl;
-                        retea -> TrimitePachet(sursa,destinator);
-                        cout<<endl;
-                        cout<<"Pentru a trimite un alt pachet introduce 1 in caz contrar introduceti orice valoare pentru\na reveni la programul principal:";
-                        cin>>ex;
-                        if (ex==1) goto A;
-                        else break;
+                        do {
+                            cout<<"Sursa:";
+                            cin>>sursa;
+                            cout<<"Introduceti destinatorul:";
+                            cin>>destinator;
+
+                            if(sursa < 0 || destinator < 0 || sursa >= x || destinator >= x) {
+                                cout << "Adrese invalide!\n";
+                                ex=1;
+                                continue;
+                            }
+
+                            cout<<endl;
+                            retea.TrimitePachet(sursa,destinator);
+                            cout<<endl;
+                            cout<<"Pentru a trimite un alt pachet introduce 1 in caz contrar introduceti orice valoare pentru\na reveni la programul principal:";
+                            cin>>ex;
+                        }while(ex==1);
+                        break;
 
                     case 4:
                         return 2;

@@ -2,6 +2,7 @@
 #ifndef C___RETEAC_H
 #define C___RETEAC_H
 
+#include <windows.h>
 
 class ReteaC {
     int n;
@@ -96,14 +97,14 @@ public:
     void stergereNod(int nod1, int nod2) {
         if (adiacenta[nod1][nod2]==1 || adiacenta[nod2][nod1]==1) {
             std::cout << "Nodul "<<nod1<<"-->"<<nod2<<" urmeaza sa fie sters\n";
+            Sleep(2000);
             std::cout << "Nodul a fost sters\n\n";
-            adiacenta[nod2][nod1]==0;
-            adiacenta[nod1][nod2]==0;
+            adiacenta[nod2][nod1]=0;
+            adiacenta[nod1][nod2]=0;
         }
         else std::cout<<"Eroare:Nodul nu exista\n\n";
     }
 };
-
 
 
 #endif //C___RETEAC_H

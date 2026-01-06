@@ -29,7 +29,7 @@ int main() {
     cout<<"Tastati 1 pentru a incepe sau 0 pentru a iesi:";
     int z;
     cin>>z;
-    loading();
+    if(z==1) loading();
     for (int i=0;i<50;i++)
         cout<<endl;
     switch (z) {
@@ -124,6 +124,9 @@ int main() {
 
                     case 4:
                         return 2;
+                    default:
+                        cout<<"Valoare invalida\a\n";
+                        Sleep(1000);
                 }
                 }
             }

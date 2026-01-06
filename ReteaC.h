@@ -1,3 +1,6 @@
+//
+// Created by Lenovo on 1/4/2026.
+//
 
 #ifndef C___RETEAC_H
 #define C___RETEAC_H
@@ -7,7 +10,7 @@
 class ReteaC {
     int n;
     double p=rand()%10/100.0;
-    int adiacenta[10][10];
+    int adiacenta[20][20];
 
 public:
     ReteaC(int noduri) {
@@ -101,6 +104,7 @@ public:
             std::cout << "Nodul a fost sters\n\n";
             adiacenta[nod2][nod1]=0;
             adiacenta[nod1][nod2]=0;
+            Sleep(2000);
         }
         else std::cout<<"Eroare:Nodul nu exista\n\n";
     }

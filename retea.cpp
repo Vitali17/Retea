@@ -70,7 +70,7 @@ int main() {
                                 break;
 
                             if (x1 < 0 || x2 < 0 || x1 >= x || x2 >= x || x1 == x2) {
-                                cout << "Eroare: Valoarea introdusa nu poate fi nod. Incercati din nou.\n";
+                                cout << "Eroare: Valoarea introdusa nu poate fi nod. Incercati din nou.\a\n";
                                 continue;
                             }
 
@@ -109,7 +109,7 @@ int main() {
                             cin>>destinator;
 
                             if(sursa < 0 || destinator < 0 || sursa >= x || destinator >= x) {
-                                cout << "Adrese invalide!\n";
+                                cout << "Adrese invalide!\a\n";
                                 ex=1;
                                 continue;
                             }
@@ -117,7 +117,8 @@ int main() {
                             cout<<endl;
                             retea.TrimitePachet(sursa,destinator);
                             cout<<endl;
-                            cout<<"Pentru a trimite un alt pachet introduce 1 in caz contrar introduceti orice valoare pentru\na reveni la programul principal:";
+                            cout<<"Pentru a trimite un alt pachet introduce 1 in caz contrar introduceti orice valoare pentru\n"
+                                  "a reveni la programul principal:";
                             cin>>ex;
                         }while(ex==1);
                         break;

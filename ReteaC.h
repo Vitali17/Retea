@@ -1,6 +1,3 @@
-//
-// Created by Lenovo on 1/4/2026.
-//
 
 #ifndef C___RETEAC_H
 #define C___RETEAC_H
@@ -101,12 +98,12 @@ public:
         if (adiacenta[nod1][nod2]==1 || adiacenta[nod2][nod1]==1) {
             std::cout << "Nodul "<<nod1<<"-->"<<nod2<<" urmeaza sa fie sters\n";
             Sleep(2000);
-            std::cout << "Nodul a fost sters\n\n";
+            std::cout << "Nodul a fost sters\a\n\n";
             adiacenta[nod2][nod1]=0;
             adiacenta[nod1][nod2]=0;
             Sleep(2000);
         }
-        else std::cout<<"Eroare:Nodul nu exista\n\n";
+        else std::cout<<"Eroare:Nodul nu exista\a\n\n";
     }
 };
 
